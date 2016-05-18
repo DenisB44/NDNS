@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+.center {
+	text-align: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#chart{
+  width:700px;
+  margin:auto;
+  display:block;  
+}
