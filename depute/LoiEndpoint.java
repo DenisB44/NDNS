@@ -29,7 +29,7 @@ public class LoiEndpoint {
 	 * @return A CollectionResponse class containing the list of all entities
 	 * persisted and a cursor to the next page.
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	@ApiMethod(name = "listLoi")
 	public CollectionResponse<Loi> listLoi(
 			@Nullable @Named("cursor") String cursorString,
@@ -92,7 +92,7 @@ public class LoiEndpoint {
 	@SuppressWarnings("unchecked")
 	@ApiMethod(name = "listLoi")
 	public CollectionResponse<Loi> search (
-			@Nullable @Named("rand") Integer rand ,
+			@Nullable @Named("rand") Integer rand,
 			@Nullable @Named("limit") Integer limit) {
 		String cursorString = null;
 		PersistenceManager mgr = null;
