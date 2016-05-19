@@ -23,8 +23,9 @@ app.directive('footerTemplate', function(){
 });
 
 app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
-    
+    	
 	$scope.UserName = "Visiteur";
+	$scope.loading = true;
 	$scope.connecte = false;
 	$scope.accueil = true;
 	$scope.affichageVote = true;
@@ -36,28 +37,32 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	
 	
 	$scope.labels = ["% lois passées", "% lois rejetées", "% lois en cours"];
-  $scope.data = [37, 54, 9];
+	$scope.data = [37, 54, 9];
 	$scope.colors = ["#90ed7d", "#f7a35c", "#7cb5ec"];
 	
 	$scope.labels2 = ["Front national", "Les Républicains", "Centre","Parti Socialiste","Les Ecologistes","Parti Communiste"];
-  $scope.data2 = [12, 31, 9, 28, 3, 7];
+	$scope.data2 = [12, 31, 9, 28, 3, 7];
 	$scope.colors2 = ["#3300CC", "#7cb5ec","#434348","#FF3300","#90ed7d","#f7a35c"];
-
 	
 	$window.init = function (){
 		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
-		var rdm = Math.abs(Math.random()*201);
+		//var rdm = Math.abs(Math.random()*201);
 		gapi.client.load('loiendpoint', 'v1', function() {
 			console.log("Init : loaded");	
-			gapi.client.loiendpoint.search({rand:rdm,limit:10}).execute(			  
+			gapi.client.loiendpoint.listLoi({limit:10}).execute(
 					function(resp) {
-						$scope.questions = resp.items;
-						console.log($scope.questions);
+						$scope.test(resp.items);
 					});	
 		}, rootApi);
 	}
 
-	$scope.fctDeco= function(){
+	$scope.test = function (lois){
+		$scope.loading = false;
+		$scope.questions = lois;
+		console.log($scope.questions);
+	}
+	
+	$scope.fctDeco = function(){
 		console.log("Methode : fctDeco");
 		var divToken = document.getElementById('varToken');
 		varaccess_token = divToken.innerHTML;
@@ -107,7 +112,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		$scope.UserName = name;
 	}
 
-	$scope.home = function (){	 
+	$scope.home = function (){
 		console.log("Methode : accueil");
 		if($scope.connecte){
 			$scope.accueil = false;
