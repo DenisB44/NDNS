@@ -25,7 +25,7 @@ public class SAXXMLParserLoi {
             SAXXMLHandlerLoi saxHandler = new SAXXMLHandlerLoi();
             xmlReader.setContentHandler(saxHandler);
             xmlReader.parse(new InputSource(is));
-            lois = getListeLois();
+            lois = saxHandler.getListeLois();
         } catch (Exception ex) {
             log.info("XML SAXXMLParser: parse() failed");
         }
