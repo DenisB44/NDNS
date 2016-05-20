@@ -6,12 +6,17 @@ import java.io.InputStream;
 
 import javax.servlet.http.*;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Transaction;
 
 import depute.SAXXMLParserDepute;
 import depute.SAXXMLParserLoi;
 import depute.Depute;
 import depute.Loi;
 
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -24,7 +29,6 @@ public class NiDeputesNiSoumisesServlet extends HttpServlet {
 		resp.setContentType("text/plain");		
 
 		log.info("NiDeputesNiSoumisesServlet : doGet");
-		/*
 		List<Loi> lois;
 		List<Depute> deputes;		
 		InputStream stream = getServletContext().getResourceAsStream("/res/Scrutins_XIV.xml");
@@ -80,7 +84,6 @@ public class NiDeputesNiSoumisesServlet extends HttpServlet {
 				 }
 			}
 		}
-		*/
 		log.info("Donnees inserees dans le datastore");
 	}
 }
