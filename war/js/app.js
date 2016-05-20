@@ -54,6 +54,13 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 						$scope.test(resp.items);
 					});	
 		}, rootApi);
+		gapi.client.load('deputeendpoint', 'v1', function() {
+			console.log("Init : loaded");	
+			gapi.client.deputeendpoint.listDepute().execute(
+					function(resp) {
+						console.log(resp.items);
+					});	
+		}, rootApi);
 	}
 
 	$scope.test = function (lois){
@@ -133,8 +140,9 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		}
 	}
 	
+	/*
 	$scope.genererLois = function(){
-		/*
+		
 	  var lois = [
 	              {id:"505",titre:"Sed ut tum ad senem senex de senectute, sic hoc libro ad amicum ",date:"25-03-2016",
 	              nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
@@ -157,12 +165,10 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
                 {id:"999",titre:"Hoc solo, quod nominatus esset aut delatus aut postulatus capite vel ",date:"25-03-2016",
                 nb_votes:1,nb_nspp:4,votes_p:["PA1"],votes_c:[],votes_a:[]}
                 ];
-	  */
-	  
 	}
+	*/
 
 	$scope.oui = function (){
-		console.log("Methode : oui");
 		$scope.questions[$scope.compteur].vote = "Pour";
 		$scope.compteur++;
 		if($scope.compteur == 10){
@@ -171,7 +177,6 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	}
 
 	$scope.non = function (){
-		console.log("Methode : non");
 		$scope.questions[$scope.compteur].vote = "Contre";
 		$scope.compteur++;
 		if($scope.compteur == 10){
@@ -180,7 +185,6 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	}
 
 	$scope.nspp = function (){
-		console.log("Methode : nspp");
 		$scope.questions[$scope.compteur].vote = "Abstention";
 		$scope.compteur++;
 		if($scope.compteur == 10){
@@ -201,6 +205,53 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	  
 	  $scope.deputeProche = "Julien Aubert";
 	  $scope.partiProche = "Les Républicains";
+	  
+	  /*
+
+var calculDepute = function(voteOui, voteNon, voteBlanc){
+	  var similarite=0;
+	  var deputePlusProche=deputeeList[0];
+	  var similaritePlusProche=0;
+	  for (var i=0; i<deputeeList.length; i++){
+		  if (deputeeList[i].pour!=null){
+			    for (var j=0; j<deputeeList[i].pour.length; j++){
+			    	for (var ij=0; ij<voteOui.length; ij++){
+			    		if (deputeeList[i].pour[j]==voteOui[ij]){
+			    			similarite++;
+				    	}
+			    	}
+		    }
+		    	
+		  }
+		  if (deputeeList[i].non!=null){
+			    for (var j=0; j<deputeeList[i].pour.length; j++){
+			    	for (var ij=0; ij<voteNon.length; ij++){
+			    		if (deputeeList[i].pour[j]==voteNon[ij]){
+			    			similarite++;
+				    	}
+		    		}
+			    }
+		  }
+		    
+		  if (deputeeList[i].abstention!=null){
+			    for (var j=0; j<deputeeList[i].pour.length; j++){
+			    	for (var ij=0; ij<voteBlanc.length; ij++){
+			    		if (deputeeList[i].pour[j].voteBlanc==deputeeList[ij]){
+			    			similarite++;
+				    	}
+			    	}
+			    }
+		  }
+		  if (similarite>similaritePlusProche){
+			  similaritePlusProche=similarite;
+			  deputePlusProche=deputeeList[i];
+		  }
+		  similarite=0
+	  }
+	  $scope.deputePlusProche=deputePlusProche;
+  } 
+
+	   */
 	  
 	  $scope.affichageFin = true;
 	  $scope.partieVote = true;
