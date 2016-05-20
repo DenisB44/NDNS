@@ -52,15 +52,15 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 			gapi.client.loiendpoint.listLoi({limit:10}).execute(
 					function(resp) {
 						$scope.test(resp.items);
+						gapi.client.load('deputeendpoint', 'v1', function() {
+							console.log("Init : loaded");	
+							gapi.client.deputeendpoint.listDepute().execute(
+									function(resp) {
+										console.log(resp.items);
+									});	
+						}, rootApi);
 					});	
-		}, rootApi);
-		gapi.client.load('deputeendpoint', 'v1', function() {
-			console.log("Init : loaded");	
-			gapi.client.deputeendpoint.listDepute().execute(
-					function(resp) {
-						console.log(resp.items);
-					});	
-		}, rootApi);
+		}, rootApi);		
 	}
 
 	$scope.test = function (lois){
