@@ -1,6 +1,7 @@
 package depute;
 
 import depute.PMF;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -8,7 +9,6 @@ import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class DeputeEndpoint {
 	 * @return The entity with primary key id.
 	 */
 	@ApiMethod(name = "getDepute")
-	public Depute getDepute(@Named("id") String id) {
+	public Depute getDepute(@Named("id") Long id) {
 		PersistenceManager mgr = getPersistenceManager();
 		Depute depute = null;
 		try {
@@ -109,7 +109,6 @@ public class DeputeEndpoint {
 		}
 		return depute;
 	}
-	
 
 	/**
 	 * This method is used for updating an existing entity. If the entity does not
@@ -140,7 +139,7 @@ public class DeputeEndpoint {
 	 * @param id the primary key of the entity to be deleted.
 	 */
 	@ApiMethod(name = "removeDepute")
-	public void removeDepute(@Named("id") String id) {
+	public void removeDepute(@Named("id") Long id) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
 			Depute depute = mgr.getObjectById(Depute.class, id);
